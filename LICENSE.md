@@ -1,6 +1,6 @@
 BOBBO-NET Friendly MIT License
 
-Copyright (c) 2024 BOBBO-NET
+Copyright (c) 2026 BOBBO-NET
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -15,8 +15,9 @@ copies or substantial portions of the Software.
 If you are to meet a person or persons who contributed work to a BOBBO-NET
 project, you are obligated to comply with one of the following actions at
 the BOBBO-NET colleague's choice:
-* You are to buy the BOBBO-NET colleague a drink of their choice.
-* You are to give the BOBBO-NET colleague a crisp high five.
+
+- You are to buy the BOBBO-NET colleague a drink of their choice.
+- You are to give the BOBBO-NET colleague a crisp high five.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
