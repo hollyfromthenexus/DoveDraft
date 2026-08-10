@@ -1,14 +1,23 @@
 name: Check Formatting
 on:
     pull_request:
+    push:
         branches: [main]
 
 jobs:
-    csharpier:
+    apply-formatting:
         runs-on: ubuntu-latest
-        name: CSharpier Format Check
+        name: Apply Formatting
         steps:
             - uses: actions/checkout@v4
             - uses: actions/setup-dotnet@v4
-            - run: dotnet tool restore
-            - run: dotnet csharpier check .
+            - uses: actions/setup-python@v5
+
+            - name: Get CSharpier
+              run: dotnet tool restore
+
+            - name: Install pre-commit
+              run: pip install pre-commit
+
+            - name: Run pre-commit
+              run: pre-commit run --all-files
