@@ -1,6 +1,8 @@
 using Godot;
 using YarnSpinnerGodot;
 
+namespace DoveDraft;
+
 public partial class ProceedIcon : TextureRect
 {
     /// <summary>

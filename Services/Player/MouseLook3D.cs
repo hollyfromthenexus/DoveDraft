@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using Godot;
 
+namespace DoveDraft;
+
 public partial class MouseLook3D : Node3D
 {
     //

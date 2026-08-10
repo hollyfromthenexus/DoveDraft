@@ -1,3 +1,5 @@
+namespace DoveDraft;
+
 public interface IDialogService : IService
 {
     /// <summary>

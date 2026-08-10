@@ -1,6 +1,8 @@
 using System;
 using Godot;
 
+namespace DoveDraft;
+
 public partial class DebugMouseLock : Node
 {
     private bool IsMouseLocked

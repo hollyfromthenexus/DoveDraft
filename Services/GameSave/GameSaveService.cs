@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using Godot;
 
+namespace DoveDraft;
+
 public partial class GameSaveService : Node, IGameSaveService
 {
     //

@@ -1,6 +1,8 @@
 using Godot;
 using System;
 
+namespace DoveDraft;
+
 public partial class DialogUiSounds : Node
 {
     [Export]

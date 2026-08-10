@@ -1,6 +1,8 @@
 using Godot;
 using System.Collections.Generic;
 
+namespace DoveDraft;
+
 public interface IPlayerInteractor
 {
     public bool IsUsing { get; set; }

@@ -1,5 +1,7 @@
 using Godot;
 
+namespace DoveDraft;
+
 [GlobalClass]
 public partial class MainCamera3D : Camera3D
 {

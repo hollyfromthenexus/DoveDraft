@@ -1,5 +1,7 @@
 using Godot;
 
+namespace DoveDraft;
+
 [Tool, GlobalClass]
 public partial class Billboard8Sprite3D : MeshInstance3D
 {

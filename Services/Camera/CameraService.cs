@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Godot;
 
+namespace DoveDraft;
+
 public partial class CameraService : Node, ICameraService, ISaveLoadable
 {
     //

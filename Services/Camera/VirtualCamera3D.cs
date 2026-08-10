@@ -1,5 +1,7 @@
 using Godot;
 
+namespace DoveDraft;
+
 [GlobalClass]
 public partial class VirtualCamera3D : Node3D
 {

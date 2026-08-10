@@ -1,3 +1,5 @@
+namespace DoveDraft;
+
 public interface IGameSaveService : IService
 {
     public void SaveState();

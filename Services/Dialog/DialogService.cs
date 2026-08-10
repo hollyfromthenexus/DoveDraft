@@ -3,6 +3,8 @@ using Godot;
 using Yarn.Markup;
 using YarnSpinnerGodot;
 
+namespace DoveDraft;
+
 public partial class DialogService : ActionMarkupHandler, IDialogService, ISaveLoadable
 {
     //

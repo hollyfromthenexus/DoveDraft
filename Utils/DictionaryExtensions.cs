@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using Godot;
 
+namespace DoveDraft;
+
 public static class DictionaryExtensions
 {
     public static Godot.Collections.Dictionary<TKey, TValue> ToGodot

@@ -1,5 +1,7 @@
 using Godot;
 
+namespace DoveDraft;
+
 public interface IPlayer
 {
     public IPlayerInteractor Interactor { get; }

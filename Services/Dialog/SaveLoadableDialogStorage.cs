@@ -1,6 +1,8 @@
 using Godot;
 using YarnSpinnerGodot;
 
+namespace DoveDraft;
+
 [GlobalClass]
 public partial class SaveLoadableDialogStorage : InMemoryVariableStorage
 {

@@ -1,5 +1,7 @@
 using Godot;
 
+namespace DoveDraft;
+
 public interface IInteractable
 {
     public bool IsInteractable { get; }

@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using Godot;
 
+namespace DoveDraft;
+
 public static class InteractableExtensionMethods
 {
     public static List<Interactable> FindInteractables(this GodotObject node)

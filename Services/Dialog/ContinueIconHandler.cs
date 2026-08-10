@@ -3,6 +3,8 @@ using System.Threading;
 using Yarn.Markup;
 using YarnSpinnerGodot;
 
+namespace DoveDraft;
+
 public partial class ContinueIconHandler : ActionMarkupHandler
 {
     [Export]

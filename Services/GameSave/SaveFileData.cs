@@ -1,6 +1,8 @@
 using Godot;
 using Godot.Collections;
 
+namespace DoveDraft;
+
 [GlobalClass]
 public partial class SaveFileData : BaseSaveData
 {

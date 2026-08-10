@@ -1,6 +1,8 @@
 using Godot;
 using Godot.Collections;
 
+namespace DoveDraft;
+
 public partial class PlayerService : Node, IPlayerService, ISaveLoadable
 {
     [Export]

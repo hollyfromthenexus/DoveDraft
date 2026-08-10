@@ -1,5 +1,7 @@
 using Godot;
 
+namespace DoveDraft;
+
 public partial class MapSaveData : BaseSaveData
 {
     [Export]

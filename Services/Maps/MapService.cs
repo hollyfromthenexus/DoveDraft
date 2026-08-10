@@ -3,6 +3,8 @@ using Godot;
 using Godot.Collections;
 using GodotTask;
 
+namespace DoveDraft;
+
 public partial class MapService : Node, IMapService, ISaveLoadable
 {
     public Map Current { get; private set; }

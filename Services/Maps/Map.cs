@@ -1,5 +1,7 @@
 using Godot;
 
+namespace DoveDraft;
+
 [GlobalClass]
 public partial class Map : WorldEnvironment
 {

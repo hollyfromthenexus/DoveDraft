@@ -1,5 +1,6 @@
-using System.Runtime.CompilerServices;
 using Godot;
+
+namespace DoveDraft;
 
 public static class Log
 {
