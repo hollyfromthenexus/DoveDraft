@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://ci6kbyg1yakgl"]
+
+[ext_resource type="Script" uid="uid://b5jjqig2q02f4" path="res://addons/DoveDraft/Services/Camera/CameraService.cs" id="1_5l1p8"]
+[ext_resource type="Script" uid="uid://ck4cejirjvj6q" path="res://addons/DoveDraft/Services/Camera/MainCamera3D.cs" id="2_7j0o4"]
+
+[node name="CameraService" type="Node" unique_id=1111929485 node_paths=PackedStringArray("MainCamera")]
+script = ExtResource("1_5l1p8")
+MainCamera = NodePath("MainCamera3D")
+
+[node name="MainCamera3D" type="Camera3D" parent="." unique_id=1109490102]
+script = ExtResource("2_7j0o4")
+metadata/_custom_type_script = "uid://ck4cejirjvj6q"

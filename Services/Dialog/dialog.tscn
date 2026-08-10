@@ -1,0 +1,293 @@
+[gd_scene format=3 uid="uid://4n8n72sap3ev"]
+
+[ext_resource type="Script" uid="uid://dm6pqhkhooftf" path="res://addons/DoveDraft/Services/Dialog/DialogService.cs" id="1_yo0bp"]
+[ext_resource type="PackedScene" uid="uid://bv42g323prh5f" path="res://addons/YarnSpinner-Godot/Scenes/DefaultDialogueSystem.tscn" id="2_qn3f6"]
+[ext_resource type="Script" uid="uid://budnld4qd513n" path="res://addons/YarnSpinner-Godot/Runtime/DialogueRunner.cs" id="2_y6j5m"]
+[ext_resource type="Resource" uid="uid://bkmt30tuak65m" path="res://DeggYarn.yarnproject" id="3_7dolu"]
+[ext_resource type="Script" uid="uid://dd12rmyfhoemn" path="res://addons/DoveDraft/Services/Dialog/SaveLoadableDialogStorage.cs" id="4_opp3a"]
+[ext_resource type="Texture2D" uid="uid://c48eopfyof2vt" path="res://addons/DoveDraft/Services/Dialog/sprites/DialogMockup.png" id="5_6ute7"]
+[ext_resource type="Script" uid="uid://b8nsxur6opm4k" path="res://addons/YarnSpinner-Godot/Runtime/Async/LinePresenter.cs" id="5_sps8b"]
+[ext_resource type="Texture2D" uid="uid://boajyk44pf10a" path="res://addons/DoveDraft/Services/Dialog/sprites/DialogProceed.png" id="7_djyhj"]
+[ext_resource type="Script" uid="uid://cnn7jn2nobaom" path="res://addons/DoveDraft/Services/Dialog/ProceedIcon.cs" id="8_hag7k"]
+[ext_resource type="Script" uid="uid://ba6k2ox6e4qg" path="res://addons/YarnSpinner-Godot/Runtime/Async/OptionsPresenter.cs" id="10_36pux"]
+[ext_resource type="Script" uid="uid://bkynantmyvluw" path="res://addons/DoveDraft/Services/Dialog/ContinueIconHandler.cs" id="10_hag7k"]
+[ext_resource type="PackedScene" uid="uid://cja610mycu3j8" path="res://addons/DoveDraft/Services/Dialog/SickOptionItem.tscn" id="11_36pux"]
+[ext_resource type="Script" uid="uid://n04rxg6440np" path="res://addons/DoveDraft/Services/Dialog/DialogUiSounds.cs" id="12_p0uyc"]
+[ext_resource type="AudioStream" uid="uid://bhhn0sgcsvurn" path="res://addons/DoveDraft/Services/Dialog/sound/DialogOpen.ogg" id="13_i5nu3"]
+[ext_resource type="AudioStream" uid="uid://bgb2xj5j3nm28" path="res://addons/DoveDraft/Services/Dialog/sound/DialogNext.ogg" id="14_opp3a"]
+[ext_resource type="AudioStream" uid="uid://foshy0ba6ylj" path="res://addons/DoveDraft/Services/Dialog/sound/DialogLineEnd.ogg" id="15_i5nu3"]
+[ext_resource type="AudioStream" uid="uid://cn6s5l40ftq7r" path="res://addons/DoveDraft/Services/Dialog/sound/DialogEnd.ogg" id="15_tptct"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sps8b"]
+bg_color = Color(0.3372549, 0.3372549, 0.3372549, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0, 0, 0, 0.11372549)
+shadow_size = 8
+shadow_offset = Vector2(8, 8)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6ute7"]
+bg_color = Color(0.8117647, 0.8117647, 0.8117647, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0, 0, 0, 0.26666668)
+shadow_size = 8
+shadow_offset = Vector2(4, 4)
+
+[node name="Dialog" type="Node" unique_id=1915060039 node_paths=PackedStringArray("Runner", "VariableStorage")]
+script = ExtResource("1_yo0bp")
+Runner = NodePath("DialogueRunner")
+VariableStorage = NodePath("SaveLoadableDialogStorage")
+
+[node name="DialogueRunner" type="Control" parent="." unique_id=1615529789 node_paths=PackedStringArray("variableStorage", "lineProvider", "dialoguePresenters")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("2_y6j5m")
+yarnProject = ExtResource("3_7dolu")
+variableStorage = NodePath("../SaveLoadableDialogStorage")
+lineProvider = NodePath("../YarnSpinnerCanvasLayer/TextLineProvider")
+dialoguePresenters = [NodePath("../Canvas/LinePresenter"), NodePath("../Canvas/OptionsPresenter")]
+
+[node name="SaveLoadableDialogStorage" type="Node" parent="." unique_id=1895359990]
+script = ExtResource("4_opp3a")
+metadata/_custom_type_script = "uid://dd12rmyfhoemn"
+
+[node name="YarnSpinnerCanvasLayer" parent="." unique_id=1758915820 instance=ExtResource("2_qn3f6")]
+offset = Vector2(100, 100)
+scale = Vector2(0.5, 0.5)
+transform = Transform2D(0.5, 0, 0, 0.5, 100, 100)
+
+[node name="DialogueRunner" parent="YarnSpinnerCanvasLayer" index="0"]
+yarnProject = ExtResource("3_7dolu")
+
+[node name="Canvas" type="CanvasLayer" parent="." unique_id=205901534]
+layer = 10
+follow_viewport_enabled = true
+
+[node name="MOCKUP" type="TextureRect" parent="Canvas" unique_id=2110877507]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_6ute7")
+metadata/_edit_lock_ = true
+
+[node name="LinePresenter" type="Control" parent="Canvas" unique_id=861715554 node_paths=PackedStringArray("dialogueRunner", "presenterControl", "lineText", "characterNameText", "characterNameContainer", "eventHandlers")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+mouse_filter = 2
+script = ExtResource("5_sps8b")
+dialogueRunner = NodePath("../../YarnSpinnerCanvasLayer/DialogueRunner")
+presenterControl = NodePath("Root")
+lineText = NodePath("Root/LineContainer/MarginContainer/LineText")
+characterNameText = NodePath("Root/NameContainer/PanelContainer/MarginContainer/CharacterNameText")
+characterNameContainer = NodePath("Root/NameContainer")
+useFadeEffect = false
+fadeUpDuration = 0.1
+typewriterEffectSpeed = 30
+ConvertHTMLToBBCode = true
+eventHandlers = [NodePath("ContinueIconHandler"), NodePath("../..")]
+
+[node name="Root" type="Control" parent="Canvas/LinePresenter" unique_id=2018861288]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -398.0
+offset_top = -305.0
+offset_right = 402.0
+offset_bottom = -55.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="LineContainer" type="PanelContainer" parent="Canvas/LinePresenter/Root" unique_id=1752018357]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_sps8b")
+
+[node name="MarginContainer" type="MarginContainer" parent="Canvas/LinePresenter/Root/LineContainer" unique_id=1031193092]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="LineText" type="RichTextLabel" parent="Canvas/LinePresenter/Root/LineContainer/MarginContainer" unique_id=1930409810]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/bold_italics_font_size = 24
+theme_override_font_sizes/italics_font_size = 24
+theme_override_font_sizes/mono_font_size = 24
+bbcode_enabled = true
+text = "The dialogue text should appear here!"
+metadata/_edit_group_ = true
+
+[node name="NameContainer" type="CenterContainer" parent="Canvas/LinePresenter/Root" unique_id=1392220494]
+layout_mode = 0
+offset_left = -33.0
+offset_top = -12.0
+offset_right = 56.0
+offset_bottom = 42.0
+rotation = -0.12735626
+
+[node name="PanelContainer" type="PanelContainer" parent="Canvas/LinePresenter/Root/NameContainer" unique_id=615246367]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6ute7")
+
+[node name="MarginContainer" type="MarginContainer" parent="Canvas/LinePresenter/Root/NameContainer/PanelContainer" unique_id=407320289]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="CharacterNameText" type="RichTextLabel" parent="Canvas/LinePresenter/Root/NameContainer/PanelContainer/MarginContainer" unique_id=575554816]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/bold_italics_font_size = 24
+theme_override_font_sizes/italics_font_size = 24
+theme_override_font_sizes/mono_font_size = 24
+bbcode_enabled = true
+text = "Name"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProceedIcon" type="TextureRect" parent="Canvas/LinePresenter/Root" unique_id=899379240]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -46.0
+offset_top = -42.0
+offset_right = 14.0
+offset_bottom = 18.0
+grow_horizontal = 0
+grow_vertical = 0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("7_djyhj")
+expand_mode = 1
+script = ExtResource("8_hag7k")
+
+[node name="ContinueIconHandler" type="Control" parent="Canvas/LinePresenter" unique_id=342750803 node_paths=PackedStringArray("Proceed")]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("10_hag7k")
+Proceed = NodePath("../Root/ProceedIcon")
+
+[node name="OptionsPresenter" type="Control" parent="Canvas" unique_id=2041312301 node_paths=PackedStringArray("presenterControl", "lastLineText", "optionParent")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("10_36pux")
+presenterControl = NodePath("Root")
+optionItemPrefab = ExtResource("11_36pux")
+showsLastLine = true
+lastLineText = NodePath("Root/PanelContainer/MarginContainer/Vertical/LastLineText")
+optionParent = NodePath("Root/PanelContainer/MarginContainer/Vertical/VBoxOptionsParent")
+
+[node name="Root" type="Control" parent="Canvas/OptionsPresenter" unique_id=987293014]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -400.0
+offset_top = -460.0
+offset_right = 400.0
+offset_bottom = -59.99939
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="Canvas/OptionsPresenter/Root" unique_id=1205022566]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -298.0006
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_sps8b")
+
+[node name="MarginContainer" type="MarginContainer" parent="Canvas/OptionsPresenter/Root/PanelContainer" unique_id=499176627]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="Vertical" type="VBoxContainer" parent="Canvas/OptionsPresenter/Root/PanelContainer/MarginContainer" unique_id=503776192]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="LastLineText" type="RichTextLabel" parent="Canvas/OptionsPresenter/Root/PanelContainer/MarginContainer/Vertical" unique_id=1229184993]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/bold_italics_font_size = 24
+theme_override_font_sizes/italics_font_size = 24
+theme_override_font_sizes/mono_font_size = 24
+text = "Last line"
+fit_content = true
+
+[node name="VBoxOptionsParent" type="VBoxContainer" parent="Canvas/OptionsPresenter/Root/PanelContainer/MarginContainer/Vertical" unique_id=1936933663]
+layout_mode = 2
+
+[node name="UISounds" type="Node" parent="." unique_id=1210375047 node_paths=PackedStringArray("Dialog")]
+script = ExtResource("12_p0uyc")
+Dialog = NodePath("..")
+
+[node name="Open" type="AudioStreamPlayer" parent="UISounds" unique_id=496896309]
+stream = ExtResource("13_i5nu3")
+volume_db = -10.0
+
+[node name="Next" type="AudioStreamPlayer" parent="UISounds" unique_id=1237558215]
+stream = ExtResource("14_opp3a")
+volume_db = -10.0
+
+[node name="LineEnd" type="AudioStreamPlayer" parent="UISounds" unique_id=459873319]
+stream = ExtResource("15_i5nu3")
+volume_db = -10.0
+
+[node name="Close" type="AudioStreamPlayer" parent="UISounds" unique_id=1356930743]
+stream = ExtResource("15_tptct")
+volume_db = -10.0
+
+[editable path="YarnSpinnerCanvasLayer"]

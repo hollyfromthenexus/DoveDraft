@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://cl63usgbt38ls"]
+
+[ext_resource type="Script" uid="uid://danaku3qonk7p" path="res://addons/DoveDraft/Services/Player/Player.cs" id="1_kfe3d"]
+[ext_resource type="Script" uid="uid://ka5p4kv40i88" path="res://addons/DoveDraft/Services/Player/MouseLook3D.cs" id="2_ph1f6"]
+[ext_resource type="Script" uid="uid://baynhu63oqxup" path="res://addons/DoveDraft/Services/Camera/VirtualCamera3D.cs" id="3_mpawu"]
+[ext_resource type="Script" uid="uid://bdo7pp41hjwxv" path="res://addons/DoveDraft/Services/Player/HudConnector.cs" id="3_ph1f6"]
+[ext_resource type="Script" uid="uid://bvf2p4r1vi8wp" path="res://addons/DoveDraft/Services/Player/PlayerInteractor.cs" id="3_wa6cj"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_j1ogh"]
+
+[node name="Player" type="CharacterBody3D" unique_id=118636542 node_paths=PackedStringArray("HeadNode", "HeadCamera", "Interactor")]
+script = ExtResource("1_kfe3d")
+HeadNode = NodePath("MouseLook")
+HeadCamera = NodePath("MouseLook/VirtualCamera3D")
+Interactor = NodePath("MouseLook/PlayerInteractor")
+
+[node name="Collider" type="CollisionShape3D" parent="." unique_id=1953033807]
+shape = SubResource("CapsuleShape3D_j1ogh")
+debug_color = Color(1, 1, 0, 1)
+
+[node name="MouseLook" type="Node3D" parent="." unique_id=1028255356]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+script = ExtResource("2_ph1f6")
+SensitivityX = 0.15
+SensitivityY = 0.15
+
+[node name="VirtualCamera3D" type="Node3D" parent="MouseLook" unique_id=597743778]
+script = ExtResource("3_mpawu")
+Priority = 50
+TransitionInPriority = 20
+TransitionInDurationMs = 500
+TransitionInCurve = 2.0
+TransitionOutPriority = 20
+TransitionOutDurationMs = 2000
+metadata/_custom_type_script = "uid://baynhu63oqxup"
+
+[node name="PlayerInteractor" type="RayCast3D" parent="MouseLook" unique_id=580152334]
+target_position = Vector3(0, 0, -2)
+debug_shape_custom_color = Color(1, 1, 0, 1)
+script = ExtResource("3_wa6cj")
+
+[node name="HUDConnector" type="Node" parent="." unique_id=387892433 node_paths=PackedStringArray("Player")]
+script = ExtResource("3_ph1f6")
+Player = NodePath("..")

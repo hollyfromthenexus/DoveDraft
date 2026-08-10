@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://bk75mubxovxck"]
+
+[ext_resource type="Script" uid="uid://bssf3tacd8efx" path="res://addons/DoveDraft/Services/HUD/Crosshair.cs" id="1_5otuw"]
+[ext_resource type="Texture2D" uid="uid://4baiud5hu6od" path="res://addons/DoveDraft/Services/HUD/textures/crosshair.png" id="1_cruqj"]
+[ext_resource type="Script" uid="uid://b21mvomxco0u1" path="res://addons/DoveDraft/Services/HUD/HUDService.cs" id="1_ffmv1"]
+[ext_resource type="Shader" uid="uid://dmtohnkxfx3yc" path="res://addons/DoveDraft/Services/HUD/CursorShader.gdshader" id="1_mb0cp"]
+[ext_resource type="Texture2D" uid="uid://bqulp3mgsk54o" path="res://addons/DoveDraft/Services/HUD/textures/crosshair-outline.png" id="2_hyat4"]
+[ext_resource type="Script" uid="uid://dk76sqrqb5fau" path="res://addons/DoveDraft/Services/HUD/CrosshairCenter.cs" id="6_qujx2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5otuw"]
+shader = ExtResource("1_mb0cp")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hyat4"]
+shader = ExtResource("1_mb0cp")
+
+[sub_resource type="Gradient" id="Gradient_qujx2"]
+colors = PackedColorArray(1, 1, 1, 0.6666667, 1, 1, 1, 1)
+
+[node name="HUD" type="CanvasLayer" unique_id=452207546 node_paths=PackedStringArray("Crosshair")]
+script = ExtResource("1_ffmv1")
+Crosshair = NodePath("Crosshair")
+
+[node name="Crosshair" type="Control" parent="." unique_id=1041145075 node_paths=PackedStringArray("Outline", "Center")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_5otuw")
+Outline = NodePath("Outline")
+Center = NodePath("Center")
+
+[node name="Outline" type="TextureRect" parent="Crosshair" unique_id=1960658245]
+material = SubResource("ShaderMaterial_5otuw")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_hyat4")
+expand_mode = 1
+
+[node name="Center" type="TextureRect" parent="Crosshair" unique_id=1978729591]
+visible = false
+material = SubResource("ShaderMaterial_hyat4")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_cruqj")
+expand_mode = 1
+script = ExtResource("6_qujx2")
+ColorAnimation = SubResource("Gradient_qujx2")
+Speed = 10.0

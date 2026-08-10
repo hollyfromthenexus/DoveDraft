@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://c8stmq6jpgh0q"]
+
+[ext_resource type="Script" uid="uid://bskk0qr1wqy4l" path="res://addons/DoveDraft/Services/Player/PlayerService.cs" id="1_3kvm3"]
+[ext_resource type="PackedScene" uid="uid://cl63usgbt38ls" path="res://addons/DoveDraft/Services/Player/player.tscn" id="2_iuebp"]
+
+[node name="PlayerService" type="Node" unique_id=983087877]
+script = ExtResource("1_3kvm3")
+PlayerPrefab = ExtResource("2_iuebp")
