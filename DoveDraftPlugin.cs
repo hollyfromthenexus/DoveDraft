@@ -17,7 +17,7 @@ public partial class DoveDraftPlugin : EditorPlugin
 
     /// <inheritdoc/>
     public override void _ExitTree()
-    {
+        {
         // Clean-up of the plugin goes here.
     }
 }
