@@ -11,7 +11,7 @@ public partial class DoveDraftPlugin : EditorPlugin
 {
     /// <inheritdoc/>
     public override void _EnterTree()
-    {
+{
         // Initialization of the plugin goes here.
     }
 
