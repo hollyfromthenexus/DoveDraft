@@ -111,9 +111,12 @@ public partial class CameraService : Node, ICameraService, ISaveLoadable
         // Calculate what the target camera SHOULD be. If this is the same
         // as our current target... EXIT EARLY.
         VirtualCamera3D nextTarget = ChooseTargetCamera();
-        if (nextTarget == MainCamera.Target) return;
+        if (nextTarget == MainCamera.Target)
+            return;
 
-        Log.For<CameraService>($"'{MainCamera.Target?.Name ?? "NULL"}' -> '{nextTarget?.Name ?? "NULL"}' .");
+        Log.For<CameraService>(
+            $"'{MainCamera.Target?.Name ?? "NULL"}' -> '{nextTarget?.Name ?? "NULL"}' ."
+        );
         MainCamera.Target = nextTarget;
     }
 

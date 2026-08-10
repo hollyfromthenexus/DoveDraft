@@ -51,7 +51,6 @@ public partial class DialogService : ActionMarkupHandler, IDialogService, ISaveL
     private bool isWritingLine = false;
     private ulong lastDialogCompleteTimeMs;
 
-
     //
     //  Godot Methods
     //
@@ -101,10 +100,7 @@ public partial class DialogService : ActionMarkupHandler, IDialogService, ISaveL
     {
         DialogVariableSaveData variableData = VariableStorage.Save();
 
-        return new DialogSaveData()
-        {
-            Variables = variableData,
-        };
+        return new DialogSaveData() { Variables = variableData };
     }
 
     public void Load(BaseSaveData data)
@@ -117,7 +113,11 @@ public partial class DialogService : ActionMarkupHandler, IDialogService, ISaveL
     //  ActionMarkupHandler Methods
     //
 
-    public override YarnTask OnCharacterWillAppear(int currentCharacterIndex, MarkupParseResult line, CancellationToken cancellationToken) => YarnTask.CompletedTask;
+    public override YarnTask OnCharacterWillAppear(
+        int currentCharacterIndex,
+        MarkupParseResult line,
+        CancellationToken cancellationToken
+    ) => YarnTask.CompletedTask;
 
     public override void OnPrepareForLine(MarkupParseResult line, RichTextLabel text)
     {

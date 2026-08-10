@@ -45,7 +45,8 @@ public partial class MapService : Node, IMapService, ISaveLoadable
         PackedScene mapScene = await LoadMapScene(mapScenePath);
         Log.For<MapService>("...loaded map scene...");
 
-        Map loadedMap = mapScene.Instantiate() as Map ?? throw new Exception("Map was wrong node type.");
+        Map loadedMap =
+            mapScene.Instantiate() as Map ?? throw new Exception("Map was wrong node type.");
         Log.For<MapService>($"...spawned map '{loadedMap.Name}'...");
 
         await GDTask.SwitchToMainThread();
@@ -62,10 +63,7 @@ public partial class MapService : Node, IMapService, ISaveLoadable
     public BaseSaveData Save()
     {
         Log.For<MapService>($"Saving current map as '{Current?.SceneFilePath ?? "NULL"}'.");
-        return new MapSaveData()
-        {
-            CurrentMapPath = Current?.SceneFilePath,
-        };
+        return new MapSaveData() { CurrentMapPath = Current?.SceneFilePath };
     }
 
     public void Load(BaseSaveData data)
@@ -95,19 +93,25 @@ public partial class MapService : Node, IMapService, ISaveLoadable
         }
 
         // Wait until the map is no longer loading.
-        while (ResourceLoader.LoadThreadedGetStatus(mapScenePath) == ResourceLoader.ThreadLoadStatus.InProgress)
+        while (
+            ResourceLoader.LoadThreadedGetStatus(mapScenePath)
+            == ResourceLoader.ThreadLoadStatus.InProgress
+        )
         {
             await GDTask.NextFrame();
         }
 
         // Verify that the load completed correctly.
-        ResourceLoader.ThreadLoadStatus finalLoadStatus = ResourceLoader.LoadThreadedGetStatus(mapScenePath);
+        ResourceLoader.ThreadLoadStatus finalLoadStatus = ResourceLoader.LoadThreadedGetStatus(
+            mapScenePath
+        );
         if (finalLoadStatus != ResourceLoader.ThreadLoadStatus.Loaded)
         {
             throw new Exception($"Failed to load map resource: {finalLoadStatus}");
         }
 
-        return ResourceLoader.LoadThreadedGet(mapScenePath) as PackedScene ?? throw new Exception("Map wasn't a PackedScene");
+        return ResourceLoader.LoadThreadedGet(mapScenePath) as PackedScene
+            ?? throw new Exception("Map wasn't a PackedScene");
     }
 
     private void SetNewMap(Map newMap)
@@ -134,7 +138,10 @@ public partial class MapService : Node, IMapService, ISaveLoadable
 
         // Check for any pre-existing maps and grab the first one.
         Array<Node> maps = GetTree().GetNodesInGroup(Map.GroupName);
-        if (maps.Count > 1) Log.For<MapService>($"Multiple maps already exist ({maps.Count}).");
+        if (maps.Count > 1)
+        {
+            Log.For<MapService>($"Multiple maps already exist ({maps.Count}).");
+        }
         Map preExistingMap = GetFirstMap(maps);
 
         if (preExistingMap == null || preExistingMap == Current)
@@ -150,7 +157,10 @@ public partial class MapService : Node, IMapService, ISaveLoadable
     {
         foreach (Node node in potentialMaps)
         {
-            if (node is Map map) return map;
+            if (node is Map map)
+            {
+                return map;
+            }
         }
 
         return null;

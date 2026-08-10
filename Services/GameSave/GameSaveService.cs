@@ -51,18 +51,11 @@ public partial class GameSaveService : Node, IGameSaveService
             BaseSaveData saveData = service.Save();
 
             // Map it by the service's type name and store it.
-            dataMappings.Add(new()
-            {
-                TypeKey = typeName,
-                Data = saveData
-            });
+            dataMappings.Add(new() { TypeKey = typeName, Data = saveData });
         }
 
         // Once all save data is generated, produce a save file from the mappings
-        SaveFileData saveFile = new()
-        {
-            AllData = new(dataMappings),
-        };
+        SaveFileData saveFile = new() { AllData = new(dataMappings) };
 
         Log.For<GameSaveService>($"All save data created, writing file...");
         ResourceSaver.Save(saveFile, saveLocation);
@@ -74,7 +67,10 @@ public partial class GameSaveService : Node, IGameSaveService
         const string saveLocation = "res://temp_save.tres";
         Log.For<GameSaveService>($"Starting load from {saveLocation}...");
 
-        SaveFileData saveFile = ResourceLoader.Load<SaveFileData>(saveLocation, cacheMode: ResourceLoader.CacheMode.IgnoreDeep);
+        SaveFileData saveFile = ResourceLoader.Load<SaveFileData>(
+            saveLocation,
+            cacheMode: ResourceLoader.CacheMode.IgnoreDeep
+        );
         Dictionary<string, ISaveLoadable> statefulServicesByType = GetStatefulServicesByTypeName();
 
         foreach (SaveFileMappingData mapping in saveFile.AllData)
@@ -86,7 +82,9 @@ public partial class GameSaveService : Node, IGameSaveService
 
             if (couldFind == false)
             {
-                Log.For<GameSaveService>($"...NO SERVICE FOR '{mapping.TypeKey}' FOUND, skipping...");
+                Log.For<GameSaveService>(
+                    $"...NO SERVICE FOR '{mapping.TypeKey}' FOUND, skipping..."
+                );
                 continue;
             }
 

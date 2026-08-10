@@ -1,6 +1,3 @@
 namespace DoveDraft;
 
-public interface IService
-{
-
-}
+public interface IService { }

@@ -16,11 +16,17 @@ public partial class DebugMouseLock : Node
         switch (@event)
         {
             case InputEventMouseButton clickEvent:
-                if (clickEvent.Pressed && clickEvent.ButtonIndex == MouseButton.Left) IsMouseLocked = true;
+                if (clickEvent.Pressed && clickEvent.ButtonIndex == MouseButton.Left)
+                {
+                    IsMouseLocked = true;
+                }
                 break;
 
             case InputEventKey keyEvent:
-                if (keyEvent.Pressed && keyEvent.Keycode == Key.Escape) IsMouseLocked = false;
+                if (keyEvent.Pressed && keyEvent.Keycode == Key.Escape)
+                {
+                    IsMouseLocked = false;
+                }
                 break;
         }
     }

@@ -1,5 +1,5 @@
-using Godot;
 using System.Collections.Generic;
+using Godot;
 
 namespace DoveDraft;
 
@@ -32,13 +32,19 @@ public partial class PlayerInteractor : RayCast3D, IPlayerInteractor
         get => isUsingInternal;
         set
         {
-            if (value == isUsingInternal) return;
+            if (value == isUsingInternal)
+            {
+                return;
+            }
 
             isUsingInternal = value;
             foreach (Interactable inter in FocusedInteractables)
             {
                 // Ignore if this interactable is not interactable.
-                if (value == true && inter.IsInteractable == false) continue;
+                if (value == true && inter.IsInteractable == false)
+                {
+                    continue;
+                }
 
                 inter.IsUsing = isUsingInternal;
             }
@@ -51,7 +57,10 @@ public partial class PlayerInteractor : RayCast3D, IPlayerInteractor
         get => isHoveringInternal;
         private set
         {
-            if (value == isHoveringInternal) return;
+            if (value == isHoveringInternal)
+            {
+                return;
+            }
 
             isHoveringInternal = value;
             EmitSignalIsHoveringChanged(value);
@@ -85,13 +94,19 @@ public partial class PlayerInteractor : RayCast3D, IPlayerInteractor
 
         // Check if the hover state has changed
         bool newHoverState = AreAnyActuallyInteractable(FocusedInteractables);
-        if (newHoverState != IsHovering) IsHovering = newHoverState;
+        if (newHoverState != IsHovering)
+        {
+            IsHovering = newHoverState;
+        }
     }
 
     public override void _Notification(int what)
     {
         // Clean up if we are being deleted.
-        if (what == NotificationPredelete) SetNewFocusedObject(null);
+        if (what == NotificationPredelete)
+        {
+            SetNewFocusedObject(null);
+        }
     }
 
     //
@@ -107,8 +122,14 @@ public partial class PlayerInteractor : RayCast3D, IPlayerInteractor
             FocusedObject?.FindInteractablesNonAlloc(findInteractableCache);
             foreach (Interactable oldInter in findInteractableCache)
             {
-                if (oldInter.IsHovering) oldInter.IsHovering = false;
-                if (oldInter.IsUsing) oldInter.IsUsing = false;
+                if (oldInter.IsHovering)
+                {
+                    oldInter.IsHovering = false;
+                }
+                if (oldInter.IsUsing)
+                {
+                    oldInter.IsUsing = false;
+                }
             }
         }
 
@@ -135,7 +156,10 @@ public partial class PlayerInteractor : RayCast3D, IPlayerInteractor
     {
         foreach (Interactable interactable in interactables)
         {
-            if (interactable.IsInteractable) return true;
+            if (interactable.IsInteractable)
+            {
+                return true;
+            }
         }
         return false;
     }

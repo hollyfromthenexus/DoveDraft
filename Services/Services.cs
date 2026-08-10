@@ -15,11 +15,11 @@ public partial class Services : Node
         Instance = this;
     }
 
-    public static TService Get<TService>() where TService : IService
-        => (TService)Instance.registeredServices[typeof(TService)];
+    public static TService Get<TService>()
+        where TService : IService => (TService)Instance.registeredServices[typeof(TService)];
 
     public static bool TryGet<TService>(out TService service)
-         where TService : IService
+        where TService : IService
     {
         if (Instance.registeredServices.TryGetValue(typeof(TService), out IService foundService))
         {
@@ -36,10 +36,8 @@ public partial class Services : Node
     public static IEnumerable<IService> GetAll() => Instance.registeredServices.Values;
 
     public static void Register<TService>(TService service)
-        where TService : IService
-        => Instance.registeredServices[typeof(TService)] = service;
+        where TService : IService => Instance.registeredServices[typeof(TService)] = service;
 
     public static void Unregister<TService>()
-        where TService : IService
-        => Instance.registeredServices.Remove(typeof(TService));
+        where TService : IService => Instance.registeredServices.Remove(typeof(TService));
 }

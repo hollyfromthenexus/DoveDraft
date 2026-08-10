@@ -25,7 +25,10 @@ public abstract partial class Interactable : Node, IInteractable
         get => isHoveringInternal;
         set
         {
-            if (isHoveringInternal == value) return;
+            if (isHoveringInternal == value)
+            {
+                return;
+            }
 
             isHoveringInternal = value;
             if (isHoveringInternal)
@@ -45,7 +48,10 @@ public abstract partial class Interactable : Node, IInteractable
         get => isUsingInternal;
         set
         {
-            if (isUsingInternal == value) return;
+            if (isUsingInternal == value)
+            {
+                return;
+            }
 
             isUsingInternal = value;
             if (isUsingInternal)
@@ -64,11 +70,15 @@ public abstract partial class Interactable : Node, IInteractable
     //  Protected Methods
     //
 
-    protected virtual void UseStart() { /* no-op */ }
+    protected virtual void UseStart() { /* no-op */
+    }
 
-    protected virtual void UseStop() { /* no-op */ }
+    protected virtual void UseStop() { /* no-op */
+    }
 
-    protected virtual void HoverStart() { /* no-op */ }
+    protected virtual void HoverStart() { /* no-op */
+    }
 
-    protected virtual void HoverStop() { /* no-op */ }
+    protected virtual void HoverStop() { /* no-op */
+    }
 }

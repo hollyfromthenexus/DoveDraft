@@ -28,7 +28,10 @@ public partial class MouseLock : Node
     public override void _Process(double delta)
     {
         // Unlock the mouse when we're in a dialog sequence.
-        if (Services.Dialog.IsInSequence && IsMouseLocked == true) IsMouseLocked = false;
+        if (Services.Dialog.IsInSequence && IsMouseLocked == true)
+        {
+            IsMouseLocked = false;
+        }
     }
 
     public override void _Input(InputEvent @event)
@@ -36,14 +39,21 @@ public partial class MouseLock : Node
         switch (@event)
         {
             case InputEventMouseButton clickEvent:
-                if (clickEvent.Pressed && clickEvent.ButtonIndex == MouseButton.Left && Services.Dialog.IsInSequence == false)
+                if (
+                    clickEvent.Pressed
+                    && clickEvent.ButtonIndex == MouseButton.Left
+                    && Services.Dialog.IsInSequence == false
+                )
                 {
                     IsMouseLocked = true;
                 }
                 break;
 
             case InputEventKey keyEvent:
-                if (keyEvent.Pressed && keyEvent.Keycode == Key.Escape) IsMouseLocked = false;
+                if (keyEvent.Pressed && keyEvent.Keycode == Key.Escape)
+                {
+                    IsMouseLocked = false;
+                }
                 break;
         }
     }

@@ -1,5 +1,5 @@
-using Godot;
 using System;
+using Godot;
 
 namespace DoveDraft;
 
@@ -20,7 +20,6 @@ public partial class DialogUiSounds : Node
         Dialog.DialogLineEnd += OnDialogLineEnd;
         Dialog.DialogComplete += OnDialogComplete;
     }
-
 
     private void OnDialogStart()
     {

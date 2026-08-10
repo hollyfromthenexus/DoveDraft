@@ -8,7 +8,8 @@ public partial class ProceedIcon : TextureRect
     /// <summary>
     /// Reference to the dialogue runner.
     /// </summary>
-    [Export] DialogueRunner dialogueRunner;
+    [Export]
+    DialogueRunner dialogueRunner;
 
     [Export]
     public float RotateAmount { get; set; } = 10;

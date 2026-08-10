@@ -160,7 +160,9 @@ public partial class MainCamera3D : Camera3D
             StartTime = Time.GetTicksMsec(),
         };
 
-        Log.For<CameraService>($"Using {transitionSettingSource?.Name ?? "NULL"}'s {transition.Duration}ms with curve {transition.EaseCurve}.");
+        Log.For<CameraService>(
+            $"Using {transitionSettingSource?.Name ?? "NULL"}'s {transition.Duration}ms with curve {transition.EaseCurve}."
+        );
         targetInternal = newTarget;
     }
 

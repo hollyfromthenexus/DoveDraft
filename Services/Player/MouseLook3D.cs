@@ -40,16 +40,24 @@ public partial class MouseLook3D : Node3D
     public override void _Input(InputEvent @event)
     {
         // If we can't look, EXIT EARLY.
-        if (CanLook == false) return;
+        if (CanLook == false)
+        {
+            return;
+        }
 
         // If the mouse isn't locked, EXIT EARLY.
-        if (Input.MouseMode != Input.MouseModeEnum.Captured) return;
+        if (Input.MouseMode != Input.MouseModeEnum.Captured)
+        {
+            return;
+        }
 
         // If this event is a mouse motion event, add it to the queue to process later.
         switch (@event)
         {
             case InputEventMouseMotion mouseMotionEvent:
-                lookEvents.Enqueue(mouseMotionEvent.Relative * new Vector2(SensitivityX, SensitivityY));
+                lookEvents.Enqueue(
+                    mouseMotionEvent.Relative * new Vector2(SensitivityX, SensitivityY)
+                );
                 break;
         }
     }

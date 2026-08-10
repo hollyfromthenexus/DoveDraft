@@ -44,11 +44,7 @@ public partial class PlayerService : Node, IPlayerService, ISaveLoadable
 
     public BaseSaveData Save()
     {
-        return new PlayerSaveData()
-        {
-            PlayerExists = Current != null,
-            Physics = Current?.Save(),
-        };
+        return new PlayerSaveData() { PlayerExists = Current != null, Physics = Current?.Save() };
     }
 
     public void Load(BaseSaveData data)
@@ -70,7 +66,9 @@ public partial class PlayerService : Node, IPlayerService, ISaveLoadable
 
         PlayerPhysicsSaveData physics = playerData.Physics;
         Current.Load(physics);
-        Log.For<PlayerService>($"...restored player to pos {physics.GlobalPosition} rot {physics.GlobalRotation}.");
+        Log.For<PlayerService>(
+            $"...restored player to pos {physics.GlobalPosition} rot {physics.GlobalRotation}."
+        );
     }
 
     //
@@ -97,7 +95,10 @@ public partial class PlayerService : Node, IPlayerService, ISaveLoadable
 
         // Check for any pre-existing players and grab the first one.
         Array<Node> players = GetTree().GetNodesInGroup(Player.GroupName);
-        if (players.Count > 1) Log.For<PlayerService>($"Multiple players already exist ({players.Count}).");
+        if (players.Count > 1)
+        {
+            Log.For<PlayerService>($"Multiple players already exist ({players.Count}).");
+        }
         Player preExistingPlayer = GetFirstPlayer(players);
 
         if (preExistingPlayer == null)
@@ -123,7 +124,10 @@ public partial class PlayerService : Node, IPlayerService, ISaveLoadable
     {
         foreach (Node node in potentialPlayers)
         {
-            if (node is Player player) return player;
+            if (node is Player player)
+            {
+                return player;
+            }
         }
 
         return null;

@@ -151,11 +151,7 @@ public partial class Player : CharacterBody3D, IPlayer
 
     public void Load(PlayerPhysicsSaveData data)
     {
-        Teleport(
-            data.GlobalPosition,
-            data.GlobalRotation,
-            data.WalkVelocity,
-            data.AirVelocity);
+        Teleport(data.GlobalPosition, data.GlobalRotation, data.WalkVelocity, data.AirVelocity);
     }
 
     //
@@ -176,7 +172,10 @@ public partial class Player : CharacterBody3D, IPlayer
         }
 
         // OTHERWISE, move towards the given input direction
-        walkVelocity = walkVelocity.MoveToward(inputDirection * GroundWalkSpeed, accelerateSpeed * (float)delta);
+        walkVelocity = walkVelocity.MoveToward(
+            inputDirection * GroundWalkSpeed,
+            accelerateSpeed * (float)delta
+        );
     }
 
     private void ProcessAirVelocity(double delta)
@@ -232,7 +231,10 @@ public partial class Player : CharacterBody3D, IPlayer
         var direction = Vector3.Zero;
 
         // If we can't use input, EXIT EARLY.
-        if (CanUseInput == false) return direction;
+        if (CanUseInput == false)
+        {
+            return direction;
+        }
 
         if (Input.IsActionPressed("player_move_forward"))
         {
@@ -266,7 +268,10 @@ public partial class Player : CharacterBody3D, IPlayer
     private bool GetInputPlayerJump()
     {
         // If we can't use input, EXIT EARLY.
-        if (CanUseInput == false) return false;
+        if (CanUseInput == false)
+        {
+            return false;
+        }
 
         return Input.IsActionJustPressed("player_move_jump");
     }

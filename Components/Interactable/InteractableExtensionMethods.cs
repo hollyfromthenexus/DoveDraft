@@ -14,7 +14,10 @@ public static class InteractableExtensionMethods
 
     public static void FindInteractablesNonAlloc(this GodotObject node, List<Interactable> results)
     {
-        if (node == null || node is not Node) return;
+        if (node == null || node is not Node)
+        {
+            return;
+        }
 
         foreach (Node child in (node as Node).GetChildren())
         {

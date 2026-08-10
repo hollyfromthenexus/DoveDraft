@@ -24,9 +24,6 @@ public partial class SaveLoadableDialogStorage : InMemoryVariableStorage
 
     public void Load(DialogVariableSaveData data)
     {
-        SetAllVariables(
-            data.Floats.ToCSharp(),
-            data.Strings.ToCSharp(),
-            data.Bools.ToCSharp());
+        SetAllVariables(data.Floats.ToCSharp(), data.Strings.ToCSharp(), data.Bools.ToCSharp());
     }
 }
