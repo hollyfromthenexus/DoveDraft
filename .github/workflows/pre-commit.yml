@@ -1,13 +1,13 @@
-name: Check Formatting
+name: Pre-commit Checks
 on:
     pull_request:
     push:
         branches: [main]
 
 jobs:
-    apply-formatting:
+    pre-commit-checks:
         runs-on: ubuntu-latest
-        name: Apply Formatting
+        name: Run pre-commit checks.
         steps:
             - uses: actions/checkout@v4
             - uses: actions/setup-dotnet@v4
@@ -18,7 +18,3 @@ jobs:
 
             - name: Run pre-commit
               uses: pre-commit/action@v3.0.1
-
-            - name: pre-commit.ci lite
-              uses: pre-commit-ci/lite-action@v1.1.0
-              if: always()
