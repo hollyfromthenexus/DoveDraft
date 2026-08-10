@@ -6,7 +6,7 @@ ci:
     for more information, see https://pre-commit.ci
   autoupdate_schedule: weekly
   autoupdate_commit_msg: "[pre-commit.ci] pre-commit autoupdate"
-  skip: []
+  skip: [dotnet-tool-restore, csharpier] # ← skip these in pre-commit.ci
   submodules: false
 
 repos:
