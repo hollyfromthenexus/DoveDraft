@@ -6,8 +6,9 @@ A Godot framework for freaks and nerds.
 
 ## Requirements
 
-- Godot 4.7
-- YarnSpinner-Godot 0.3.12
+- Godot 4.7 (bc it's the engine, silly).
+- YarnSpinner-Godot 0.3.12 (for dialog stuff).
+- uv or pipx (for the pre-commit stuff).
 
 ## Install
 
