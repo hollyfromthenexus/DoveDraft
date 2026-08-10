@@ -16,8 +16,9 @@ jobs:
             - name: Get CSharpier
               run: dotnet tool restore
 
-            - name: Install pre-commit
-              run: pip install pre-commit
-
             - name: Run pre-commit
-              run: pre-commit run --all-files
+              uses: pre-commit/action@v3.0.1
+
+            - name: pre-commit.ci lite
+              uses: pre-commit-ci/lite-action@v1.1.0
+              if: always()
