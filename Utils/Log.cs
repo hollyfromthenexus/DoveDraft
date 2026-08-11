@@ -8,4 +8,9 @@ public static class Log
     {
         GD.Print($"[{typeof(T)}] {message}");
     }
+
+    public static void WarnFor<T>(string message)
+    {
+        GD.PushWarning($"[{typeof(T)}] {message}");
+    }
 }
