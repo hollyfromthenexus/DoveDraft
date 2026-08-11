@@ -52,7 +52,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("2_y6j5m")
-yarnProject = ExtResource("3_7dolu")
 variableStorage = NodePath("../SaveLoadableDialogStorage")
 lineProvider = NodePath("../YarnSpinnerCanvasLayer/TextLineProvider")
 dialoguePresenters = [NodePath("../Canvas/LinePresenter"), NodePath("../Canvas/OptionsPresenter")]
