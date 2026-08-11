@@ -60,11 +60,29 @@ public partial class DialogService : ActionMarkupHandler, IDialogService, ISaveL
         Runner.onDialogueStart += OnDialogStart;
         Runner.onDialogueComplete += OnDialogComplete;
 
+        // Fetch the yarn project from DoveDraft config and use it!
+        if (Services.TryGet(out IDoveDraftConfigService configService))
+        {
+            // TODO - do we need to set LineProvider and VariableStorage?
+            Runner.SetProject(configService.Config.GameYarnProject);
+        }
+        else
+        {
+            Log.WarnFor<DialogService>(
+                $"{nameof(IDoveDraftConfigService)} not found, no {nameof(YarnProject)} used..."
+            );
+        }
+
         Services.Register<IDialogService>(this);
     }
 
     public override void _ExitTree()
     {
+        Runner.onDialogueComplete -= OnDialogComplete;
+        Runner.onDialogueStart -= OnDialogStart;
+
+        Runner.SetProject(null);
+
         Services.Unregister<IDialogService>();
     }
 
