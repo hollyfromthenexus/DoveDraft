@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://dm6pqhkhooftf" path="res://addons/DoveDraft/Services/Dialog/DialogService.cs" id="1_yo0bp"]
 [ext_resource type="PackedScene" uid="uid://bv42g323prh5f" path="res://addons/YarnSpinner-Godot/Scenes/DefaultDialogueSystem.tscn" id="2_qn3f6"]
 [ext_resource type="Script" uid="uid://budnld4qd513n" path="res://addons/YarnSpinner-Godot/Runtime/DialogueRunner.cs" id="2_y6j5m"]
-[ext_resource type="Resource" uid="uid://bkmt30tuak65m" path="res://DeggYarn.yarnproject" id="3_7dolu"]
 [ext_resource type="Script" uid="uid://dd12rmyfhoemn" path="res://addons/DoveDraft/Services/Dialog/SaveLoadableDialogStorage.cs" id="4_opp3a"]
 [ext_resource type="Texture2D" uid="uid://c48eopfyof2vt" path="res://addons/DoveDraft/Services/Dialog/sprites/DialogMockup.png" id="5_6ute7"]
 [ext_resource type="Script" uid="uid://b8nsxur6opm4k" path="res://addons/YarnSpinner-Godot/Runtime/Async/LinePresenter.cs" id="5_sps8b"]
@@ -64,9 +63,6 @@ metadata/_custom_type_script = "uid://dd12rmyfhoemn"
 offset = Vector2(100, 100)
 scale = Vector2(0.5, 0.5)
 transform = Transform2D(0.5, 0, 0, 0.5, 100, 100)
-
-[node name="DialogueRunner" parent="YarnSpinnerCanvasLayer" index="0"]
-yarnProject = ExtResource("3_7dolu")
 
 [node name="Canvas" type="CanvasLayer" parent="." unique_id=205901534]
 layer = 10
