@@ -104,10 +104,12 @@ public partial class Player : CharacterBody3D, IPlayer
     public override void _EnterTree()
     {
         AddToGroup(GroupName);
+        Services.MouseLock.SetLock(nameof(Player), true, 5);
     }
 
     public override void _ExitTree()
     {
+        Services.MouseLock.ClearLock(nameof(Player));
         RemoveFromGroup(GroupName);
     }
 

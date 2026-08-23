@@ -164,15 +164,36 @@ public partial class DialogService : ActionMarkupHandler, IDialogService, ISaveL
 
     private void OnDialogStart()
     {
+        StealMouse(true);
+
         IsInSequence = true;
         EmitSignalDialogStart();
     }
 
     private void OnDialogComplete()
     {
-        IsInSequence = false;
+        StealMouse(false);
+
         lastDialogCompleteTimeMs = Time.GetTicksMsec();
         EmitSignalDialogComplete();
+    }
+
+    //
+    //  Private Methods
+    //
+
+    private void StealMouse(bool grabbed)
+    {
+        const string key = nameof(DialogService);
+
+        if (grabbed)
+        {
+            Services.MouseLock.SetLock(key, false, 100);
+        }
+        else
+        {
+            Services.MouseLock.ClearLock(key);
+        }
     }
 }
 
