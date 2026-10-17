@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using Godot;
 using Godot.Collections;
 using GodotTask;
@@ -34,7 +35,7 @@ public partial class MapService : Node, IMapService, ISaveLoadable
     //  IMapService Methods
     //
 
-    public async GDTask TransitionTo(string mapScenePath)
+    public async GDTask TransitionTo(string mapScenePath, CancellationToken token)
     {
         // TODO - gracefully handle multiple attempts to call this at once.
 
@@ -42,18 +43,24 @@ public partial class MapService : Node, IMapService, ISaveLoadable
         await GDTask.SwitchToThreadPool();
 
         // Load the scene from disk and spawn it.
-        PackedScene mapScene = await LoadMapScene(mapScenePath);
+        PackedScene mapScene = await LoadMapScene(mapScenePath, token);
         Log.For<MapService>("...loaded map scene...");
 
         Map loadedMap =
             mapScene.Instantiate() as Map ?? throw new Exception("Map was wrong node type.");
         Log.For<MapService>($"...spawned map '{loadedMap.Name}'...");
 
-        await GDTask.SwitchToMainThread();
+        await GDTask.SwitchToMainThread(token);
 
         // Apply it!
         SetNewMap(loadedMap);
         Log.For<MapService>("...completed map transition!");
+    }
+
+    public void Clear()
+    {
+        Log.For<MapService>("Cleared map.");
+        SetNewMap(null);
     }
 
     //
@@ -76,14 +83,15 @@ public partial class MapService : Node, IMapService, ISaveLoadable
             return;
         }
 
-        TransitionTo(mapData.CurrentMapPath).Forget();
+        // TODO - this needs better cancellation... right?
+        TransitionTo(mapData.CurrentMapPath, CancellationToken.None).Forget();
     }
 
     //
     //  Private Methods
     //
 
-    private async GDTask<PackedScene> LoadMapScene(string mapScenePath)
+    private async GDTask<PackedScene> LoadMapScene(string mapScenePath, CancellationToken token)
     {
         // Start loading the map's assets.
         Error err = ResourceLoader.LoadThreadedRequest(mapScenePath, typeHint: "PackedScene");
@@ -98,7 +106,7 @@ public partial class MapService : Node, IMapService, ISaveLoadable
             == ResourceLoader.ThreadLoadStatus.InProgress
         )
         {
-            await GDTask.NextFrame();
+            await GDTask.NextFrame(token);
         }
 
         // Verify that the load completed correctly.
