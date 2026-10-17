@@ -136,5 +136,5 @@ public partial class PlayerService : Node, IPlayerService, ISaveLoadable
 
 public partial class Services
 {
-    public IPlayerService Player => Get<IPlayerService>();
+    public static IPlayerService Player => Get<IPlayerService>();
 }
