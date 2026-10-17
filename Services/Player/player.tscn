@@ -9,6 +9,7 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_j1ogh"]
 
 [node name="Player" type="CharacterBody3D" unique_id=118636542 node_paths=PackedStringArray("HeadNode", "HeadCamera", "Interactor")]
+collision_layer = 513
 script = ExtResource("1_kfe3d")
 HeadNode = NodePath("MouseLook")
 HeadCamera = NodePath("MouseLook/VirtualCamera3D")
