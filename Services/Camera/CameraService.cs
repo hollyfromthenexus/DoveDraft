@@ -73,6 +73,13 @@ public partial class CameraService : Node, ICameraService, ISaveLoadable
         if (couldRemove)
         {
             virtualCamera.PriorityChanged -= OnVirtualCameraPriorityChanged;
+
+            if (MainCamera.Target == virtualCamera)
+            {
+                MainCamera.Target = null;
+                MainCamera.SkipTransition();
+            }
+
             flagRefreshNextFrame = true;
         }
 
@@ -124,12 +131,15 @@ public partial class CameraService : Node, ICameraService, ISaveLoadable
     {
         VirtualCamera3D target = cameras.FirstOrDefault();
 
+        Log.For<CameraService>("Choosing");
         foreach (VirtualCamera3D camera in cameras)
         {
             if (camera.Priority > target.Priority)
             {
                 target = camera;
             }
+
+            Log.For<CameraService>(camera.GetParent().Name);
         }
 
         return target;

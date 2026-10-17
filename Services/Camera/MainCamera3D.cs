@@ -89,8 +89,11 @@ public partial class MainCamera3D : Camera3D
 
     public void SkipTransition()
     {
-        GlobalPosition = Target.GlobalPosition;
-        GlobalBasis = Target.GlobalBasis;
+        if (Target != null)
+        {
+            GlobalPosition = Target.GlobalPosition;
+            GlobalBasis = Target.GlobalBasis;
+        }
         EndTransition();
         FlagTeleported();
     }
