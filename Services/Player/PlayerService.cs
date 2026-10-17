@@ -74,6 +74,12 @@ public partial class PlayerService : Node, IPlayerService, ISaveLoadable
         );
     }
 
+    public void ClearPlayer()
+    {
+        Current?.QueueFree();
+        Current = null;
+    }
+
     //
     //  Private Methods
     //
@@ -84,12 +90,6 @@ public partial class PlayerService : Node, IPlayerService, ISaveLoadable
         AddChild(newPlayer);
 
         return newPlayer;
-    }
-
-    private void ClearPlayer()
-    {
-        Current?.QueueFree();
-        Current = null;
     }
 
     private void LocateAndUseExistingPlayer()
