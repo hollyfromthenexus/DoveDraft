@@ -46,7 +46,7 @@ public partial class MouseLook3D : Node3D
         }
 
         // If the mouse isn't locked, EXIT EARLY.
-        if (Input.MouseMode != Input.MouseModeEnum.Captured)
+        if (Services.MouseLock.IsLocked == false)
         {
             return;
         }

@@ -1,9 +1,8 @@
-using System.Collections.Generic;
 using Godot;
 
 namespace DoveDraft;
 
-public partial class MouseLock : Node, IMouseLockService
+public partial class MouseLockService : Node, IMouseLockService
 {
     //
     //  Public Events
@@ -35,7 +34,7 @@ public partial class MouseLock : Node, IMouseLockService
     //  Constructor
     //
 
-    public MouseLock()
+    public MouseLockService()
     {
         lockPreference.OnValueChanged += OnLockPreferenceValueChanged;
     }
@@ -65,14 +64,14 @@ public partial class MouseLock : Node, IMouseLockService
             case InputEventMouseButton clickEvent:
                 if (clickEvent.Pressed && clickEvent.ButtonIndex == MouseButton.Left)
                 {
-                    ClearLock(nameof(MouseLock));
+                    ClearLock(nameof(MouseLockService));
                 }
                 break;
 
             case InputEventKey keyEvent:
                 if (keyEvent.Pressed && keyEvent.Keycode == Key.Escape)
                 {
-                    SetLock(nameof(MouseLock), false, 500);
+                    SetLock(nameof(MouseLockService), false, 500);
                 }
                 break;
         }
@@ -101,7 +100,7 @@ public partial class MouseLock : Node, IMouseLockService
     /// <param name="prefKey">The key driving the new mouse lock state.</param>
     private void OnLockPreferenceValueChanged(bool isLocked, string prefKey)
     {
-        Log.For<MouseLock>(
+        Log.For<MouseLockService>(
             $"Mouse {(isLocked ? "locked" : "unlocked")} by \"{prefKey ?? "DEFAULT"}\"."
         );
         IsActualMouseLocked = isLocked;
