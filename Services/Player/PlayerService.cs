@@ -16,7 +16,9 @@ public partial class PlayerService : Node, IPlayerService, ISaveLoadable
 
     public override void _EnterTree()
     {
+        Services.Map.OnMapLoadStatusChanged += OnMapLoadStatusChanged;
         Services.Register<IPlayerService>(this);
+
         LocateAndUseExistingPlayer();
     }
 
@@ -35,6 +37,7 @@ public partial class PlayerService : Node, IPlayerService, ISaveLoadable
 
     public override void _ExitTree()
     {
+        Services.Map.OnMapLoadStatusChanged -= OnMapLoadStatusChanged;
         Services.Unregister<IPlayerService>();
     }
 
@@ -131,6 +134,14 @@ public partial class PlayerService : Node, IPlayerService, ISaveLoadable
         }
 
         return null;
+    }
+
+    private void OnMapLoadStatusChanged(MapLoadStatus status)
+    {
+        if (status == MapLoadStatus.Loaded)
+        {
+            LocateAndUseExistingPlayer();
+        }
     }
 }
 
