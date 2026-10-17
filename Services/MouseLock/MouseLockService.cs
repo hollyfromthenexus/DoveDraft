@@ -68,12 +68,12 @@ public partial class MouseLockService : Node, IMouseLockService
                 }
                 break;
 
-            case InputEventKey keyEvent:
-                if (keyEvent.Pressed && keyEvent.Keycode == Key.Escape)
-                {
-                    SetLock(nameof(MouseLockService), false, 500);
-                }
-                break;
+            // case InputEventKey keyEvent:
+            //     if (keyEvent.Pressed && keyEvent.Keycode == Key.Escape)
+            //     {
+            //         SetLock(nameof(MouseLockService), false, 500);
+            //     }
+            //     break;
         }
     }
 
