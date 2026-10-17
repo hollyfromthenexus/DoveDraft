@@ -26,3 +26,8 @@ public partial class DoveDraftConfigService : Node, IDoveDraftConfigService
         Services.Unregister<IDoveDraftConfigService>();
     }
 }
+
+public partial class Services
+{
+    public static IDoveDraftConfigService Config => Get<IDoveDraftConfigService>();
+}
