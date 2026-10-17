@@ -36,9 +36,18 @@ public partial class DialogService : ActionMarkupHandler, IDialogService, ISaveL
     [Export]
     public SaveLoadableDialogStorage VariableStorage { get; set; }
 
+    [Export]
+    private CanvasLayer Canvas { get; set; }
+
     //
     //  Public Data
     //
+
+    public bool Visible
+    {
+        get => Canvas.Visible;
+        set => Canvas.Visible = value;
+    }
 
     public bool IsInSequence { get; private set; }
 

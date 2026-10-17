@@ -2,6 +2,8 @@ namespace DoveDraft;
 
 public interface IDialogService : IService
 {
+    public bool Visible { get; set; }
+
     /// <summary>
     /// Gets or sets a value indicating whether we are currently in a dialog sequence.
     /// </summary>

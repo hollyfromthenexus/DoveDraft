@@ -37,10 +37,11 @@ shadow_color = Color(0, 0, 0, 0.26666668)
 shadow_size = 8
 shadow_offset = Vector2(4, 4)
 
-[node name="Dialog" type="Node" unique_id=1915060039 node_paths=PackedStringArray("Runner", "VariableStorage")]
+[node name="Dialog" type="Node" unique_id=1915060039 node_paths=PackedStringArray("Runner", "VariableStorage", "Canvas")]
 script = ExtResource("1_yo0bp")
 Runner = NodePath("DialogueRunner")
 VariableStorage = NodePath("SaveLoadableDialogStorage")
+Canvas = NodePath("Canvas")
 
 [node name="DialogueRunner" type="Control" parent="." unique_id=1615529789 node_paths=PackedStringArray("variableStorage", "lineProvider", "dialoguePresenters")]
 layout_mode = 3
@@ -60,6 +61,7 @@ script = ExtResource("4_opp3a")
 metadata/_custom_type_script = "uid://dd12rmyfhoemn"
 
 [node name="YarnSpinnerCanvasLayer" parent="." unique_id=1758915820 instance=ExtResource("2_qn3f6")]
+visible = false
 offset = Vector2(100, 100)
 scale = Vector2(0.5, 0.5)
 transform = Transform2D(0.5, 0, 0, 0.5, 100, 100)
