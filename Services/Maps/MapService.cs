@@ -8,6 +8,10 @@ namespace DoveDraft;
 
 public partial class MapService : Node, IMapService, ISaveLoadable
 {
+    public event IMapService.MapLoadStatusChangedDelegate OnMapLoadStatusChanged;
+
+    public int LoadStartTimeDelayMs { get; set; }
+
     public Map Current { get; private set; }
 
     //
@@ -40,6 +44,10 @@ public partial class MapService : Node, IMapService, ISaveLoadable
         // TODO - gracefully handle multiple attempts to call this at once.
 
         Log.For<MapService>($"Starting map transition to '{mapScenePath}'...");
+        OnMapLoadStatusChanged?.Invoke(MapLoadStatus.Starting);
+        await GDTask.Delay(LoadStartTimeDelayMs, token);
+
+        OnMapLoadStatusChanged?.Invoke(MapLoadStatus.Loading);
         await GDTask.SwitchToThreadPool();
 
         // Load the scene from disk and spawn it.
@@ -55,6 +63,8 @@ public partial class MapService : Node, IMapService, ISaveLoadable
         // Apply it!
         SetNewMap(loadedMap);
         Log.For<MapService>("...completed map transition!");
+
+        OnMapLoadStatusChanged?.Invoke(MapLoadStatus.Loaded);
     }
 
     public void Clear()
