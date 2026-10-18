@@ -43,3 +43,10 @@ script = ExtResource("3_wa6cj")
 [node name="HUDConnector" type="Node" parent="." unique_id=387892433 node_paths=PackedStringArray("Player")]
 script = ExtResource("3_ph1f6")
 Player = NodePath("..")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1324497083]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6021019, 0)
+light_bake_mode = 0
+omni_range = 32.0
+omni_attenuation = 1.5
+omni_shadow_mode = 0

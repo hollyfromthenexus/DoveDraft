@@ -2,11 +2,106 @@
 
 [ext_resource type="Script" uid="uid://b5jjqig2q02f4" path="res://addons/DoveDraft/Services/Camera/CameraService.cs" id="1_5l1p8"]
 [ext_resource type="Script" uid="uid://ck4cejirjvj6q" path="res://addons/DoveDraft/Services/Camera/MainCamera3D.cs" id="2_7j0o4"]
+[ext_resource type="Material" uid="uid://b0a3muu7jml5e" path="res://addons/flowerwall_crt/shaders/blurx_shader.material" id="4_81n3a"]
+[ext_resource type="Material" uid="uid://b46xvq2bfbtf3" path="res://addons/flowerwall_crt/shaders/blury_shader.material" id="5_sw4go"]
+[ext_resource type="Material" uid="uid://bfrm0btagrrq" path="res://addons/flowerwall_crt/shaders/bloom_shader.material" id="6_bcqm7"]
+[ext_resource type="Material" uid="uid://crnuulps7l3x3" path="res://addons/flowerwall_crt/shaders/crt_shader.material" id="7_yrp33"]
 
 [node name="CameraService" type="Node" unique_id=1111929485 node_paths=PackedStringArray("MainCamera")]
 script = ExtResource("1_5l1p8")
-MainCamera = NodePath("MainCamera3D")
+MainCamera = NodePath("CanvasLayer/SubViewportContainer/SubViewport/MainCamera3D")
 
-[node name="MainCamera3D" type="Camera3D" parent="." unique_id=1109490102]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1438433658]
+layer = -800
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1015052077]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0, 0, 0, 1)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer" unique_id=444437775]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+stretch_shrink = 4
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer" unique_id=2018169408]
+handle_input_locally = false
+size = Vector2i(360, 270)
+render_target_update_mode = 4
+
+[node name="MainCamera3D" type="Camera3D" parent="CanvasLayer/SubViewportContainer/SubViewport" unique_id=1109490102]
 script = ExtResource("2_7j0o4")
 metadata/_custom_type_script = "uid://ck4cejirjvj6q"
+
+[node name="flowerwall_crt" type="Control" parent="CanvasLayer" unique_id=1736349292]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="preblur_x" type="CanvasLayer" parent="CanvasLayer/flowerwall_crt" unique_id=1725093549]
+layer = 220
+
+[node name="x_blur" type="ColorRect" parent="CanvasLayer/flowerwall_crt/preblur_x" unique_id=1754651421]
+material = ExtResource("4_81n3a")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="preblur_y" type="CanvasLayer" parent="CanvasLayer/flowerwall_crt" unique_id=199741647]
+layer = 220
+
+[node name="y_blur" type="ColorRect" parent="CanvasLayer/flowerwall_crt/preblur_y" unique_id=1459370736]
+material = ExtResource("5_sw4go")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="CRT" type="CanvasLayer" parent="CanvasLayer/flowerwall_crt" unique_id=1743063007]
+layer = 222
+
+[node name="crt_shader" type="ColorRect" parent="CanvasLayer/flowerwall_crt/CRT" unique_id=1860442333]
+material = ExtResource("7_yrp33")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="post_bloom" type="CanvasLayer" parent="CanvasLayer/flowerwall_crt" unique_id=542168968]
+layer = 223
+
+[node name="bloom" type="ColorRect" parent="CanvasLayer/flowerwall_crt/post_bloom" unique_id=1738910186]
+material = ExtResource("6_bcqm7")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
