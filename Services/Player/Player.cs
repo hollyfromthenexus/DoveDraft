@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 namespace DoveDraft;
@@ -105,6 +106,16 @@ public partial class Player : CharacterBody3D, IPlayer
     {
         AddToGroup(GroupName);
         Services.MouseLock.SetLock(nameof(Player), true, 5);
+    }
+
+    public override void _Ready()
+    {
+        Vector3 headRot = HeadNode.RotationDegrees;
+        headRot.Y += RotationDegrees.Y;
+
+        Vector3 bodyRot = RotationDegrees;
+        bodyRot.Y = 0;
+        RotationDegrees = bodyRot;
     }
 
     public override void _ExitTree()
