@@ -11,6 +11,7 @@ public interface IInteractable
     public bool IsUsing { get; set; }
 }
 
+[Tool]
 [GlobalClass]
 public abstract partial class Interactable : Node, IInteractable
 {
